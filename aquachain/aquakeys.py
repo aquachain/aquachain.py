@@ -30,7 +30,6 @@ class Keystore(object):
         if directory == '':
             log.info("no directory found, looking in default place: %s",
                      default_keystore_dir())
-
             directory = default_keystore_dir()
 
         self.hdpath = hdpath
@@ -47,7 +46,7 @@ class Keystore(object):
 
         for (root, dirs, files) in os.walk(self.directory):
             for file in files:
-                if file.startswith('aqua--') and file.endswith('.wallet'):
+                if file.startswith('aqua') and file.endswith('.wallet'):
                     file_abs = os.path.join(root, file)
                     log.info("Found aqua key: %s", file)
                     try:
@@ -73,7 +72,7 @@ class Keystore(object):
         mkdir_if_not_exist(self.directory)
         now = datetime.datetime.now()
         nowstr = now.strftime("%s") + str(now.microsecond)
-        filename = f'aqua--{nowstr}.wallet'
+        filename = f'aqua{nowstr}.wallet'
         abs = os.path.join(self.directory, filename)
 
         dat = {
