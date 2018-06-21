@@ -5,7 +5,7 @@ import os
 from aquachain.bip44 import HDPrivateKey
 from web3 import Web3
 from mnemonic import Mnemonic
-
+import eth_utils
 import logging
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 log = logging.getLogger('AQUA')
@@ -88,7 +88,7 @@ class AquaTool(object):
         log.debug("signed tx: %s", signed)
         return signed.rawTransaction
 
-    def get_nonce(self, acct, fromblock='pending'):
+    def getnonce(self, acct, fromblock='pending'):
         nonce = self.Result("aqua_getTransactionCount",
                               [acct, fromblock])
         if nonce == '':
@@ -160,6 +160,10 @@ class AquaTool(object):
         except Exception as e:
             log.error("error getting accounts: %s", e)
             return []
+
+    def checksum_encode(self, address):
+        return eth_utils.to_checksum_address(address)
+
 
 if __name__ == '__main__':
     block = AquaTool(rpchost='https://c.onical.org').getblock('latest')

@@ -45,6 +45,9 @@ class Test_Blocks(unittest.TestCase):
         print("head block")
         print(aqua.gethead())
 
+    def test_checksum_encode(self):
+        self.assertTrue('0x545ac449bfc7891ef1a8d2065aa2a54ba7570c45' != aqua.checksum_encode('0x545ac449bfc7891ef1a8d2065aa2a54ba7570c45'))
+
 
 class Test_Transactions(unittest.TestCase):
     def test_gettransaction(self):

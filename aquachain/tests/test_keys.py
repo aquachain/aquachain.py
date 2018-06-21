@@ -40,7 +40,7 @@ class Test_Account(unittest.TestCase):
     #              signed)
 
     def test_nonce(self):
-        n = aqua.get_nonce('0x545ac449bfc7891ef1a8d2065aa2a54ba7570c45', fromblock='latest')
+        n = aqua.getnonce('0x545ac449bfc7891ef1a8d2065aa2a54ba7570c45', fromblock='latest')
         log.info("found account nonce: %s", n)
 
     def test_mnemonic_keys(self):
