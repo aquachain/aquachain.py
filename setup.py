@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 from setuptools import setup
-
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
-
+version = '0.0.2'
 setup(
-    install_requires = requirements,
+    install_requires = ['base58', 'mnemonic', 'web3', 'ethereum'],
     name='aquachain.py',
     url='https://github.com/aquachain/aquachain.py',
     packages = ['aquachain'],
-    version='0.0.1',
+    version=version,
     description='Aquachain for Python 3.6.5',
+    description_long='Aquachain for Python 3.6.5 -- See README or https://aquachain.github.io for more information.',
     author='aerth',
     author_email='aerth@riseup.net',
     license = 'GPL',
