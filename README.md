@@ -4,3 +4,10 @@
 
 ```python3 setup.py install --user```
 
+## Usage
+
+```
+from aquachain.aquatool import AquaTool
+from aquachain.aquakeys import Keystore
+
+```

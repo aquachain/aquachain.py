@@ -8,7 +8,7 @@ setup(
     packages = ['aquachain'],
     version=version,
     description='Aquachain for Python 3.6.5',
-    description_long='Aquachain for Python 3.6.5 -- See README or https://aquachain.github.io for more information.',
+    long_description='Aquachain for Python 3.6.5 -- See README or https://aquachain.github.io for more information.',
     author='aerth',
     author_email='aerth@riseup.net',
     license = 'GPL',
