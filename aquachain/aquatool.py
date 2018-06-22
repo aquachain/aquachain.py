@@ -142,9 +142,9 @@ class AquaTool(object):
 
     # account
     #
-    def getbalance(self, account):
+    def getbalance(self, account, fromblock='latest'):
         log.debug("getting balance %s", account)
-        result = self.Result("aqua_balance", [account, "latest"])
+        result = self.Result("aqua_balance", [account, fromblock])
         if result is Exception:
             log.error("getbalance %s", result)
             return 0.00
