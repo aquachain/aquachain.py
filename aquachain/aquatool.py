@@ -6,9 +6,10 @@ from aquachain.bip44 import HDPrivateKey
 from web3 import Web3
 from mnemonic import Mnemonic
 import eth_utils
+
 import logging
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
-log = logging.getLogger('AQUA')
+log = logging.getLogger(__name__)
 
 class AquaTool(object):
     def __init__(self, rpchost='', ipcpath=''):
