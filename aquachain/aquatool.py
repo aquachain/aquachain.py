@@ -14,10 +14,10 @@ log = logging.getLogger(__name__)
 class AquaTool(object):
     def __init__(self, rpchost='', ipcpath=''):
         if ipcpath != '':
-            log.info("using ipc: %s", ipcpath)
+            log.debug("using ipc: %s", ipcpath)
             self.provider = Web3.IPCProvider(os.path.expanduser(ipcpath))
         elif rpchost != '':
-            log.info("using httprpc: %s", rpchost)
+            log.debug("using httprpc: %s", rpchost)
             self.provider = Web3.HTTPProvider(rpchost)
         else:
             raise Exception("need either ipc or http")
@@ -97,7 +97,7 @@ class AquaTool(object):
         return int(nonce, 16)
 
     def send_raw_tx(self, rawtx):
-        log.info("tryingf to send this tx: %s", rawtx)
+        log.debug("trying to send this tx: %s", rawtx)
         return self.Result("aqua_sendRawTransaction", [self.w3.toHex(rawtx)])
 
     # block stuff

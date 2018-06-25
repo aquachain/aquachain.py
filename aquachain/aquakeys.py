@@ -28,13 +28,13 @@ def default_keystore_dir():
 class Keystore(object):
     def __init__(self, directory='', hdpath="m/44'/60'/0'/0"):
         if directory == '':
-            log.info("no directory found, looking in default place: %s",
+            log.warn("no directory found, looking in default place: %s",
                      default_keystore_dir())
             directory = default_keystore_dir()
 
         self.hdpath = hdpath
         self.directory = directory
-        log.info("keystore dir: %s", self.directory)
+        log.debug("keystore dir: %s", self.directory)
 
     # listphrases returns available phrases in keystore directory
     def listphrases(self):
@@ -48,7 +48,7 @@ class Keystore(object):
             for file in files:
                 if file.startswith('aqua') and file.endswith('.wallet'):
                     file_abs = os.path.join(root, file)
-                    log.info("Found aqua key: %s", file)
+                    log.debug("Found aqua key: %s", file)
                     try:
                         contents = self.readfile(file_abs)
                         if 'poem' not in contents:
@@ -59,7 +59,7 @@ class Keystore(object):
                         log.error("skipping becausae \"%s\"", e)
                         continue
                     else:
-                        log.info("WAS GOOD KEY: %s", file)
+                        log.debug("WAS GOOD KEY: %s", file)
                         keys.append(contents['poem'])
         return keys
 
