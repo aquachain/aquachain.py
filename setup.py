@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from setuptools import setup
-version = '0.0.7'
+version = '0.0.8'
 setup(
     install_requires = ['base58', 'mnemonic', 'web3', 'ethereum'],
     name='aquachain.py',
