@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module aquachain.aquatool</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="aquachain.html"><font color="#ffffff">aquachain</font></a>.aquatool</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/user/.local/lib/python3.6/site-packages/aquachain/aquatool.py">/home/user/.local/lib/python3.6/site-packages/aquachain/aquatool.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="eth_utils.html">eth_utils</a><br>
+</td><td width="25%" valign=top><a href="logging.html">logging</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="aquachain.aquatool.html#AquaTool">AquaTool</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AquaTool">class <strong>AquaTool</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="AquaTool-Result"><strong>Result</strong></a>(self, method, params)</dt><dd><tt>#&nbsp;Result&nbsp;returns&nbsp;the&nbsp;RPC&nbsp;response&nbsp;(or&nbsp;empty&nbsp;string),&nbsp;and&nbsp;logs&nbsp;any&nbsp;errors</tt></dd></dl>
+
+<dl><dt><a name="AquaTool-__init__"><strong>__init__</strong></a>(self, rpchost='', ipcpath='')</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="AquaTool-checksum_encode"><strong>checksum_encode</strong></a>(self, address)</dt></dl>
+
+<dl><dt><a name="AquaTool-create_wallet"><strong>create_wallet</strong></a>(self, private_key, password='')</dt></dl>
+
+<dl><dt><a name="AquaTool-from_hex"><strong>from_hex</strong></a>(self, s)</dt></dl>
+
+<dl><dt><a name="AquaTool-from_hex_i"><strong>from_hex_i</strong></a>(self, i)</dt></dl>
+
+<dl><dt><a name="AquaTool-from_wei"><strong>from_wei</strong></a>(self, amount, denom='ether')</dt></dl>
+
+<dl><dt><a name="AquaTool-generate_key"><strong>generate_key</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AquaTool-generate_phrase"><strong>generate_phrase</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AquaTool-generate_seed"><strong>generate_seed</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AquaTool-getaccounts"><strong>getaccounts</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AquaTool-getbalance"><strong>getbalance</strong></a>(self, account, fromblock='latest')</dt><dd><tt>#&nbsp;account</tt></dd></dl>
+
+<dl><dt><a name="AquaTool-getblock"><strong>getblock</strong></a>(self, number)</dt></dl>
+
+<dl><dt><a name="AquaTool-getblockbyhash"><strong>getblockbyhash</strong></a>(self, hash)</dt></dl>
+
+<dl><dt><a name="AquaTool-gethead"><strong>gethead</strong></a>(self)</dt><dd><tt>#&nbsp;block&nbsp;stuff</tt></dd></dl>
+
+<dl><dt><a name="AquaTool-gethead_header"><strong>gethead_header</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AquaTool-getheader"><strong>getheader</strong></a>(self, number)</dt></dl>
+
+<dl><dt><a name="AquaTool-getheaderbyhash"><strong>getheaderbyhash</strong></a>(self, hash)</dt></dl>
+
+<dl><dt><a name="AquaTool-getnonce"><strong>getnonce</strong></a>(self, acct, fromblock='pending')</dt></dl>
+
+<dl><dt><a name="AquaTool-getrpc"><strong>getrpc</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AquaTool-gettransaction"><strong>gettransaction</strong></a>(self, hash)</dt><dd><tt>#&nbsp;tx</tt></dd></dl>
+
+<dl><dt><a name="AquaTool-key_from_mnemonic"><strong>key_from_mnemonic</strong></a>(self, words, password='')</dt></dl>
+
+<dl><dt><a name="AquaTool-key_from_seed"><strong>key_from_seed</strong></a>(self, seed)</dt></dl>
+
+<dl><dt><a name="AquaTool-seed_from_mnemonic"><strong>seed_from_mnemonic</strong></a>(self, words, password='')</dt></dl>
+
+<dl><dt><a name="AquaTool-seed_to_mnemonic"><strong>seed_to_mnemonic</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="AquaTool-send_raw_tx"><strong>send_raw_tx</strong></a>(self, rawtx)</dt></dl>
+
+<dl><dt><a name="AquaTool-sendtx"><strong>sendtx</strong></a>(self, tx)</dt></dl>
+
+<dl><dt><a name="AquaTool-setrpc"><strong>setrpc</strong></a>(self, host)</dt></dl>
+
+<dl><dt><a name="AquaTool-sign_tx"><strong>sign_tx</strong></a>(self, private, tx)</dt></dl>
+
+<dl><dt><a name="AquaTool-to_hex"><strong>to_hex</strong></a>(self, anything)</dt></dl>
+
+<dl><dt><a name="AquaTool-to_wei"><strong>to_wei</strong></a>(self, amount, denom='ether')</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>log</strong> = &lt;Logger aquachain.aquatool (INFO)&gt;</td></tr></table>
+</body></html>

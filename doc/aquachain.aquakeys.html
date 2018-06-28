@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module aquachain.aquakeys</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="aquachain.html"><font color="#ffffff">aquachain</font></a>.aquakeys</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/user/.local/lib/python3.6/site-packages/aquachain/aquakeys.py">/home/user/.local/lib/python3.6/site-packages/aquachain/aquakeys.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+<a href="errno.html">errno</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+<a href="logging.html">logging</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="aquachain.aquakeys.html#Keystore">Keystore</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Keystore">class <strong>Keystore</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;<a href="#Keystore">Keystore</a>&nbsp;has&nbsp;a&nbsp;directory&nbsp;and&nbsp;a&nbsp;HD&nbsp;path,&nbsp;creates&nbsp;and&nbsp;manages&nbsp;keys.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Keystore-__init__"><strong>__init__</strong></a>(self, directory='', hdpath="m/44'/60'/0'/0")</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Keystore-from_parent_key"><strong>from_parent_key</strong></a>(self, key, i)</dt><dd><tt>#&nbsp;from_parent_key&nbsp;returns&nbsp;a&nbsp;key&nbsp;derived&nbsp;from&nbsp;the&nbsp;parent&nbsp;key,&nbsp;at&nbsp;i</tt></dd></dl>
+
+<dl><dt><a name="Keystore-is_valid"><strong>is_valid</strong></a>(self, phrase)</dt></dl>
+
+<dl><dt><a name="Keystore-listphrases"><strong>listphrases</strong></a>(self)</dt><dd><tt>#&nbsp;listphrases&nbsp;returns&nbsp;available&nbsp;phrases&nbsp;in&nbsp;keystore&nbsp;directory</tt></dd></dl>
+
+<dl><dt><a name="Keystore-load_phrase"><strong>load_phrase</strong></a>(self, phrase, password)</dt><dd><tt>#&nbsp;load_phrase&nbsp;returns&nbsp;a&nbsp;HDKey&nbsp;from&nbsp;the&nbsp;phrase&nbsp;with&nbsp;given&nbsp;password</tt></dd></dl>
+
+<dl><dt><a name="Keystore-load_phrases"><strong>load_phrases</strong></a>(self, phrases, password)</dt><dd><tt>#&nbsp;load_phrase&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;keys,&nbsp;from&nbsp;the&nbsp;given&nbsp;phrases&nbsp;and&nbsp;password.</tt></dd></dl>
+
+<dl><dt><a name="Keystore-readfile"><strong>readfile</strong></a>(self, filename)</dt><dd><tt>#&nbsp;readfile&nbsp;reads&nbsp;aquachain&nbsp;phrase&nbsp;files&nbsp;containing&nbsp;'poem'&nbsp;field</tt></dd></dl>
+
+<dl><dt><a name="Keystore-save_phrase"><strong>save_phrase</strong></a>(self, phrase)</dt><dd><tt>#&nbsp;save_phrase&nbsp;writes&nbsp;a&nbsp;new&nbsp;phrase&nbsp;file&nbsp;to&nbsp;the&nbsp;keystore&nbsp;directory</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-default_keystore_dir"><strong>default_keystore_dir</strong></a>()</dt></dl>
+ <dl><dt><a name="-mkdir_if_not_exist"><strong>mkdir_if_not_exist</strong></a>(path)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>log</strong> = &lt;Logger aquachain.aquakeys (INFO)&gt;</td></tr></table>
+</body></html>
