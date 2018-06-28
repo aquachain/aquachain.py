@@ -19,10 +19,32 @@ def mkdir_if_not_exist(path):
             pass
         else:
             raise
-
 def default_keystore_dir():
-    # TODO: windows
-    return os.path.expanduser('~/.aquachain/keystore/')
+    import sys
+    data_dir = 'aquakeys'
+    if sys.platform == 'darwin':
+        data_dir = os.path.expanduser(os.path.join(
+            "~",
+            "Library",
+            "AquaChain",
+            "aquakeys",
+        ))
+    elif sys.platform in {'linux', 'linux2', 'linux3'}:
+        data_dir = os.path.expanduser(os.path.join(
+            "~",
+            ".aquachain",
+            "aquakeys",
+        ))
+    elif sys.platform == 'win32':
+        data_dir = os.path.expanduser(os.path.join(
+            "\\",
+            "~",
+            "AppData",
+            "Roaming",
+            "AquaChain",
+            "aquakeys",
+        ))
+    return data_dir
 
 # Keystore has a directory and a HD path, creates and manages keys.
 class Keystore(object):
