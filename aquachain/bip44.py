@@ -50,15 +50,15 @@ import random
 
 from web3 import Web3
 
-from two1.bitcoin.utils import bytes_to_str
-from two1.bitcoin.utils import address_to_key_hash
-from two1.bitcoin.utils import rand_bytes
+from aquachain.utils44 import bytes_to_str
+from aquachain.utils44 import address_to_key_hash
+from aquachain.utils44 import rand_bytes
 
 from mnemonic.mnemonic import Mnemonic
 
-from two1.crypto.ecdsa_base import Point
-from two1.crypto.ecdsa import ECPointAffine
-from two1.crypto.ecdsa import secp256k1
+from aquachain.crypto.ecdsa_base import Point
+from aquachain.crypto.ecdsa import ECPointAffine
+from aquachain.crypto.ecdsa import secp256k1
 bitcoin_curve = secp256k1()
 
 encode_hex = Web3().toHex
@@ -1115,32 +1115,6 @@ class HDPrivateKey(HDKey, PrivateKeyBase):
         """
         return HDPrivateKey.master_key_from_seed(
             Mnemonic.to_seed(mnemonic, passphrase))
-
-    @staticmethod
-    def master_key_from_entropy(passphrase='', strength=128):
-        """ Generates a master key from system entropy.
-
-        Args:
-            strength (int): Amount of entropy desired. This should be
-               a multiple of 32 between 128 and 256.
-            passphrase (str): An optional passphrase for the generated
-               mnemonic string.
-
-        Returns:
-            HDPrivateKey, str:
-                a tuple consisting of the master
-                private key and a mnemonic string from which the seed
-                can be recovered.
-        """
-        if strength % 32 != 0:
-            raise ValueError("strength must be a multiple of 32")
-        if strength < 128 or strength > 256:
-            raise ValueError("strength should be >= 128 and <= 256")
-        entropy = rand_bytes(strength // 8)
-        m = Mnemonic(language='english')
-        n = m.to_mnemonic(entropy)
-        return HDPrivateKey.master_key_from_seed(
-            Mnemonic.to_seed(n, passphrase)), n
 
     @staticmethod
     def master_key_from_seed(seed):
