@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 def mkdir_if_not_exist(path):
     try:
-        os.makedirs(path)
+        os.makedirs(path, mode=0o700)
     except OSError as exc:  # Python >2.5
         if exc.errno == errno.EEXIST and os.path.isdir(path):
             pass
