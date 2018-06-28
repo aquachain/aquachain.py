@@ -14,7 +14,8 @@ WAIT_SECONDS=0.5
 class System:
     def __init__(self, *kwargs):
         # self.aqua = AquaTool(ipcpath='/home/user/.aquachain/aquachain.ipc')
-        self.aqua = AquaTool(rpchost='https://c.onical.org')
+        self.aqua = AquaTool(ipcpath='/home/user/.aquachain/testnet/aquachain.ipc')
+        # self.aqua = AquaTool(rpchost='https://c.onical.org')
 
     def run(self):
         txpool = self.aqua.w3.txpool

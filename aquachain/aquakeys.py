@@ -4,7 +4,7 @@ import json
 import datetime
 import os
 import errno
-
+from mnemonic import Mnemonic
 from aquachain.bip44 import HDPrivateKey, HDKey
 
 import logging
@@ -35,6 +35,17 @@ class Keystore(object):
         self.hdpath = hdpath
         self.directory = directory
         log.debug("keystore dir: %s", self.directory)
+
+    def is_valid(self, phrase):
+        phrase = phrase.strip()
+        words = phrase.split(" ")
+        if len(words) < 12:
+            log.error("invalid phrase length: %s \n", len(phrase.split(" ")))
+            raise ValueError("invalid phrase length")
+        for word in words:
+            if word not in Mnemonic('english').wordlist:
+                raise ValueError(f"invalid word: {word}")
+        return True
 
     # listphrases returns available phrases in keystore directory
     def listphrases(self):
