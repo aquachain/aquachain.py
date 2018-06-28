@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module aquachain.utils44</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="aquachain.html"><font color="#ffffff">aquachain</font></a>.utils44</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/user/.local/lib/python3.6/site-packages/aquachain/utils44.py">/home/user/.local/lib/python3.6/site-packages/aquachain/utils44.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;submodule&nbsp;provides&nbsp;functions&nbsp;for&nbsp;accomplishing&nbsp;common&nbsp;tasks&nbsp;encountered<br>
+in&nbsp;creating&nbsp;and&nbsp;parsing&nbsp;Bitcoin&nbsp;objects,&nbsp;like&nbsp;turning&nbsp;difficulties&nbsp;into&nbsp;targets<br>
+or&nbsp;deserializing&nbsp;and&nbsp;serializing&nbsp;various&nbsp;kinds&nbsp;of&nbsp;packed&nbsp;byte&nbsp;formats.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="base58.html">base58</a><br>
+<a href="codecs.html">codecs</a><br>
+</td><td width="25%" valign=top><a href="hashlib.html">hashlib</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="random.html">random</a><br>
+<a href="struct.html">struct</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-address_to_key_hash"><strong>address_to_key_hash</strong></a>(s)</dt><dd><tt>Given&nbsp;a&nbsp;Bitcoin&nbsp;address&nbsp;decodes&nbsp;the&nbsp;version&nbsp;and<br>
+RIPEMD-160&nbsp;hash&nbsp;of&nbsp;the&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;(bytes):&nbsp;The&nbsp;Bitcoin&nbsp;address&nbsp;to&nbsp;decode<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(version,&nbsp;h160)&nbsp;(tuple):&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;version&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;RIPEMD-160&nbsp;hash&nbsp;of&nbsp;the&nbsp;public&nbsp;key.</tt></dd></dl>
+ <dl><dt><a name="-bits_to_difficulty"><strong>bits_to_difficulty</strong></a>(bits)</dt><dd><tt>Determines&nbsp;the&nbsp;difficulty&nbsp;corresponding&nbsp;to&nbsp;bits.<br>
+See:&nbsp;https://en.bitcoin.it/wiki/Difficulty<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bits&nbsp;(int):&nbsp;Compact&nbsp;target&nbsp;(32&nbsp;bits)<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;diff&nbsp;(float):&nbsp;Measure&nbsp;of&nbsp;how&nbsp;hard&nbsp;it&nbsp;is&nbsp;to&nbsp;find&nbsp;a&nbsp;solution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;below&nbsp;the&nbsp;target&nbsp;represented&nbsp;by&nbsp;bits.</tt></dd></dl>
+ <dl><dt><a name="-bits_to_target"><strong>bits_to_target</strong></a>(bits)</dt><dd><tt>Decodes&nbsp;the&nbsp;full&nbsp;target&nbsp;from&nbsp;a&nbsp;compact&nbsp;representation.<br>
+See:&nbsp;https://bitcoin.org/en/developer-reference#target-nbits<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bits&nbsp;(int):&nbsp;Compact&nbsp;target&nbsp;(32&nbsp;bits)<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;target&nbsp;(Bignum):&nbsp;Full&nbsp;256-bit&nbsp;target</tt></dd></dl>
+ <dl><dt><a name="-bytes_to_str"><strong>bytes_to_str</strong></a>(b)</dt><dd><tt>Converts&nbsp;bytes&nbsp;into&nbsp;a&nbsp;hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;bytes&nbsp;to&nbsp;encode<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;hex-encoded&nbsp;string&nbsp;corresponding&nbsp;to&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-compute_reward"><strong>compute_reward</strong></a>(height)</dt><dd><tt>Computes&nbsp;the&nbsp;block&nbsp;reward&nbsp;for&nbsp;a&nbsp;block&nbsp;at&nbsp;the&nbsp;supplied&nbsp;height.<br>
+See:&nbsp;https://en.bitcoin.it/wiki/Controlled_supply&nbsp;for&nbsp;the&nbsp;reward<br>
+schedule.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;height&nbsp;(int):&nbsp;Block&nbsp;height<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reward&nbsp;(int):&nbsp;Number&nbsp;of&nbsp;satoshis&nbsp;rewarded&nbsp;for&nbsp;solving&nbsp;a&nbsp;block&nbsp;at&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;given&nbsp;height.</tt></dd></dl>
+ <dl><dt><a name="-difficulty_to_bits"><strong>difficulty_to_bits</strong></a>(difficulty)</dt><dd><tt>Converts&nbsp;a&nbsp;difficulty&nbsp;to&nbsp;a&nbsp;compact&nbsp;target.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;difficulty&nbsp;(float):&nbsp;The&nbsp;difficulty&nbsp;to&nbsp;create&nbsp;a&nbsp;target&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ct&nbsp;(int):&nbsp;Compact&nbsp;target</tt></dd></dl>
+ <dl><dt><a name="-difficulty_to_target"><strong>difficulty_to_target</strong></a>(difficulty)</dt><dd><tt>Converts&nbsp;a&nbsp;difficulty&nbsp;to&nbsp;a&nbsp;long-form&nbsp;target.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;difficulty&nbsp;(float):&nbsp;The&nbsp;difficulty&nbsp;to&nbsp;return&nbsp;the&nbsp;appropriate&nbsp;target&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;target&nbsp;(int):&nbsp;The&nbsp;corresponding&nbsp;target</tt></dd></dl>
+ <dl><dt><a name="-hash160"><strong>hash160</strong></a>(b)</dt><dd><tt>Computes&nbsp;the&nbsp;HASH160&nbsp;of&nbsp;b.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;byte&nbsp;string&nbsp;to&nbsp;compute&nbsp;the&nbsp;HASH160&nbsp;of.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;RIPEMD-160&nbsp;digest&nbsp;of&nbsp;the&nbsp;SHA256&nbsp;hash&nbsp;of&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-hex_str_to_bytes"><strong>hex_str_to_bytes</strong></a>(h)</dt><dd><tt>Converts&nbsp;a&nbsp;hex-encoded&nbsp;string&nbsp;to&nbsp;bytes.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;hex-encoded&nbsp;string&nbsp;to&nbsp;convert.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;bytes&nbsp;corresponding&nbsp;to&nbsp;h.</tt></dd></dl>
+ <dl><dt><a name="-key_hash_to_address"><strong>key_hash_to_address</strong></a>(hash160, version=0)</dt><dd><tt>Convert&nbsp;RIPEMD-160&nbsp;hash&nbsp;to&nbsp;bitcoin&nbsp;address.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hash160&nbsp;(bytes/str):&nbsp;bitcoin&nbsp;hash160&nbsp;to&nbsp;decode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;version&nbsp;(int):&nbsp;The&nbsp;version&nbsp;prefix<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(bitcoin&nbsp;address):&nbsp;base58&nbsp;encoded&nbsp;bitcoin&nbsp;address</tt></dd></dl>
+ <dl><dt><a name="-pack_compact_int"><strong>pack_compact_int</strong></a>(i)</dt><dd><tt>See<br>
+https://bitcoin.org/en/developer-reference#compactsize-unsigned-integers<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;(int):&nbsp;Integer&nbsp;to&nbsp;be&nbsp;serialized.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;Serialized&nbsp;bytes&nbsp;corresponding&nbsp;to&nbsp;i.</tt></dd></dl>
+ <dl><dt><a name="-pack_u32"><strong>pack_u32</strong></a>(i)</dt><dd><tt>Serializes&nbsp;a&nbsp;32-bit&nbsp;integer&nbsp;into&nbsp;little-endian&nbsp;form.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;(int):&nbsp;integer&nbsp;to&nbsp;be&nbsp;serialized.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;4&nbsp;bytes&nbsp;containing&nbsp;the&nbsp;little-endian&nbsp;serialization&nbsp;of&nbsp;i.</tt></dd></dl>
+ <dl><dt><a name="-pack_u64"><strong>pack_u64</strong></a>(i)</dt><dd><tt>Serializes&nbsp;a&nbsp;64-bit&nbsp;integer&nbsp;into&nbsp;little-endian&nbsp;form.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;(int):&nbsp;integer&nbsp;to&nbsp;be&nbsp;serialized.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;8&nbsp;bytes&nbsp;containing&nbsp;the&nbsp;little-endian&nbsp;serialization&nbsp;of&nbsp;i.</tt></dd></dl>
+ <dl><dt><a name="-pack_var_str"><strong>pack_var_str</strong></a>(s)</dt><dd><tt>Serializes&nbsp;a&nbsp;variable&nbsp;length&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;(bytes):&nbsp;byte&nbsp;stream&nbsp;to&nbsp;serialize<br>
+&nbsp;<br>
+Return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;Serialized&nbsp;bytes,&nbsp;prepended&nbsp;with&nbsp;the&nbsp;length&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;byte&nbsp;stream.</tt></dd></dl>
+ <dl><dt><a name="-rand_bytes"><strong>rand_bytes</strong></a>(n, secure=True)</dt><dd><tt>Returns&nbsp;n&nbsp;random&nbsp;bytes.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;(int):&nbsp;number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;return.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;secure&nbsp;(bool):&nbsp;If&nbsp;True,&nbsp;uses&nbsp;os.urandom&nbsp;to&nbsp;generate<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cryptographically&nbsp;secure&nbsp;random&nbsp;bytes.&nbsp;Otherwise,&nbsp;uses<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random.randint()&nbsp;which&nbsp;generates&nbsp;pseudo-random&nbsp;numbers.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;n&nbsp;random&nbsp;bytes.</tt></dd></dl>
+ <dl><dt><a name="-render_int"><strong>render_int</strong></a>(n)</dt><dd><tt>Renders&nbsp;an&nbsp;int&nbsp;in&nbsp;the&nbsp;shortest&nbsp;possible&nbsp;form.<br>
+&nbsp;<br>
+When&nbsp;packing&nbsp;the&nbsp;height&nbsp;into&nbsp;the&nbsp;coinbase&nbsp;script,&nbsp;the&nbsp;integer<br>
+representing&nbsp;the&nbsp;height&nbsp;must&nbsp;be&nbsp;encoded&nbsp;in&nbsp;the&nbsp;shortest&nbsp;possible<br>
+manner.&nbsp;See:&nbsp;https://bitcoin.org/en/developer-reference#coinbase.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;(int):&nbsp;number&nbsp;to&nbsp;be&nbsp;encoded.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;bytes&nbsp;representing&nbsp;n&nbsp;in&nbsp;the&nbsp;shortest&nbsp;possible&nbsp;form.</tt></dd></dl>
+ <dl><dt><a name="-target_to_bits"><strong>target_to_bits</strong></a>(target)</dt><dd><tt>Creates&nbsp;a&nbsp;compact&nbsp;target&nbsp;representation&nbsp;for&nbsp;a&nbsp;given&nbsp;target.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;target&nbsp;(Bignum):&nbsp;The&nbsp;long-form&nbsp;target&nbsp;to&nbsp;make&nbsp;compact.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ct&nbsp;(int):&nbsp;Compact&nbsp;target</tt></dd></dl>
+ <dl><dt><a name="-unpack_compact_int"><strong>unpack_compact_int</strong></a>(bytestr)</dt><dd><tt>See<br>
+https://bitcoin.org/en/developer-reference#compactsize-unsigned-integers<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytestr&nbsp;(bytes):&nbsp;bytes&nbsp;containing&nbsp;an&nbsp;unsigned&nbsp;integer&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deserialized.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;(int):&nbsp;deserialized&nbsp;integer.</tt></dd></dl>
+ <dl><dt><a name="-unpack_u32"><strong>unpack_u32</strong></a>(b)</dt><dd><tt>Deserializes&nbsp;a&nbsp;32-bit&nbsp;integer&nbsp;from&nbsp;bytes.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;At&nbsp;least&nbsp;4&nbsp;bytes&nbsp;containing&nbsp;the&nbsp;serialized&nbsp;integer.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(i,&nbsp;b)&nbsp;(tuple):&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;deserialized&nbsp;integer&nbsp;and&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;remainder&nbsp;of&nbsp;the&nbsp;byte&nbsp;stream.</tt></dd></dl>
+ <dl><dt><a name="-unpack_u64"><strong>unpack_u64</strong></a>(b)</dt><dd><tt>Deserializes&nbsp;a&nbsp;64-bit&nbsp;integer&nbsp;from&nbsp;bytes.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;At&nbsp;least&nbsp;8&nbsp;bytes&nbsp;containing&nbsp;the&nbsp;serialized&nbsp;integer.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(i,&nbsp;b)&nbsp;(tuple):&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;deserialized&nbsp;integer&nbsp;and&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;remainder&nbsp;of&nbsp;the&nbsp;byte&nbsp;stream.</tt></dd></dl>
+ <dl><dt><a name="-unpack_var_str"><strong>unpack_var_str</strong></a>(b)</dt><dd><tt>Deserializes&nbsp;a&nbsp;variable&nbsp;length&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;variable&nbsp;length&nbsp;byte&nbsp;stream&nbsp;to&nbsp;deserialize<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(s,&nbsp;b)&nbsp;(tuple):&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;variable&nbsp;length&nbsp;byte&nbsp;stream<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;the&nbsp;remainder&nbsp;of&nbsp;the&nbsp;input&nbsp;byte&nbsp;stream.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>MAX_TARGET</strong> = 269595352910113094...4164086137773096960</td></tr></table>
+</body></html>

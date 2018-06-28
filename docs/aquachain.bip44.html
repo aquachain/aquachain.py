@@ -1,0 +1,1205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module aquachain.bip44</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="aquachain.html"><font color="#ffffff">aquachain</font></a>.bip44</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/user/.local/lib/python3.6/site-packages/aquachain/bip44.py">/home/user/.local/lib/python3.6/site-packages/aquachain/bip44.py</a></font></td></tr></table>
+    <p><tt>Ethereum&nbsp;BIP44&nbsp;Python<br>
+https://github.com/michailbrynard/ethereum-bip44-python<br>
+================================<br>
+&nbsp;<br>
+*Code&nbsp;adapted&nbsp;from&nbsp;two1&nbsp;library&nbsp;for&nbsp;bitcoin&nbsp;by&nbsp;21&nbsp;Inc.&nbsp;(https://github.com/21dotco/two1-python/tree/master/two1)<br>
+&nbsp;<br>
+###&nbsp;Requirements<br>
+Python&nbsp;packages:<br>
+`pip&nbsp;install&nbsp;two1&nbsp;pycrypto&nbsp;rlp&nbsp;pycryptodome`<br>
+&nbsp;<br>
+Imports:<br>
+`from&nbsp;crypto&nbsp;import&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>,&nbsp;<a href="#HDPublicKey">HDPublicKey</a>,&nbsp;<a href="#HDKey">HDKey</a>`<br>
+&nbsp;<br>
+###&nbsp;BIP32&nbsp;Master&nbsp;Keys&nbsp;Creation:<br>
+```<br>
+master_key,&nbsp;mnemonic&nbsp;=&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>.master_key_from_entropy()<br>
+print('BIP32&nbsp;Wallet&nbsp;Generated.')<br>
+print('Mnemonic&nbsp;Secret:&nbsp;'&nbsp;+&nbsp;mnemonic)<br>
+```<br>
+&nbsp;<br>
+###&nbsp;Get&nbsp;Account&nbsp;XPUB<br>
+```<br>
+master_key&nbsp;=&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>.master_key_from_mnemonic('laundry&nbsp;snap&nbsp;patient&nbsp;survey&nbsp;sleep&nbsp;strategy&nbsp;finger&nbsp;bone&nbsp;real&nbsp;west&nbsp;arch&nbsp;protect')<br>
+root_keys&nbsp;=&nbsp;<a href="#HDKey">HDKey</a>.from_path(master_key,"m/44'/60'/0'")<br>
+acct_priv_key&nbsp;=&nbsp;root_keys[-1]<br>
+acct_pub_key&nbsp;=&nbsp;acct_priv_key.public_key<br>
+print('Account&nbsp;Master&nbsp;Public&nbsp;Key&nbsp;(Hex):&nbsp;'&nbsp;+&nbsp;acct_pub_key.to_hex())<br>
+print('XPUB&nbsp;format:&nbsp;'&nbsp;+&nbsp;acct_pub_key.to_b58check())<br>
+```<br>
+&nbsp;<br>
+###&nbsp;Get&nbsp;Address&nbsp;from&nbsp;XPUB<br>
+```<br>
+acct_pub_key&nbsp;=&nbsp;<a href="#HDKey">HDKey</a>.from_b58check('xpub6DKMR7KpgCJbiN4TdzcqcB1Nk84D9bsYUBhbk43EjRqH4RTjz7UgGLZxcQ4JdHBSHDmTUDLApMwYHRQCbbMCPQEtcbVofZEQjFazpGPT1nW')<br>
+keys&nbsp;=&nbsp;<a href="#HDKey">HDKey</a>.from_path(acct_pub_key,'{change}/{index}'.format(change=0,&nbsp;index=0))<br>
+address&nbsp;=&nbsp;keys[-1].address()<br>
+print('Account&nbsp;address:&nbsp;'&nbsp;+&nbsp;address)<br>
+```</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="base58.html">base58</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="hashlib.html">hashlib</a><br>
+<a href="hmac.html">hmac</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+<a href="random.html">random</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="aquachain.bip44.html#HDKey">HDKey</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="aquachain.bip44.html#HDPrivateKey">HDPrivateKey</a>(<a href="aquachain.bip44.html#HDKey">HDKey</a>, <a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="aquachain.bip44.html#HDPublicKey">HDPublicKey</a>(<a href="aquachain.bip44.html#HDKey">HDKey</a>, <a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="aquachain.bip44.html#PrivateKey">PrivateKey</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="aquachain.bip44.html#PublicKey">PublicKey</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="aquachain.bip44.html#Signature">Signature</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HDKey">class <strong>HDKey</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;and&nbsp;<a href="#HDPublicKey">HDPublicKey</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(<a href="#PrivateKey">PrivateKey</a>&nbsp;or&nbsp;<a href="#PublicKey">PublicKey</a>):&nbsp;The&nbsp;underlying&nbsp;simple&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;that&nbsp;is&nbsp;used&nbsp;to&nbsp;sign/verify.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chain_code&nbsp;(bytes):&nbsp;The&nbsp;chain&nbsp;code&nbsp;associated&nbsp;with&nbsp;the&nbsp;HD&nbsp;key.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;depth&nbsp;(int):&nbsp;How&nbsp;many&nbsp;levels&nbsp;below&nbsp;the&nbsp;master&nbsp;node&nbsp;this&nbsp;key&nbsp;is.&nbsp;By<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;definition,&nbsp;depth&nbsp;=&nbsp;0&nbsp;for&nbsp;the&nbsp;master&nbsp;node.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;(int):&nbsp;A&nbsp;value&nbsp;between&nbsp;0&nbsp;and&nbsp;0xffffffff&nbsp;indicating&nbsp;the&nbsp;child<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number.&nbsp;Values&nbsp;&gt;=&nbsp;0x80000000&nbsp;are&nbsp;considered&nbsp;hardened&nbsp;children.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent_fingerprint&nbsp;(bytes):&nbsp;The&nbsp;fingerprint&nbsp;of&nbsp;the&nbsp;parent&nbsp;node.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;0x00000000&nbsp;for&nbsp;the&nbsp;master&nbsp;node.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDKey">HDKey</a>:&nbsp;An&nbsp;<a href="#HDKey">HDKey</a>&nbsp;<a href="builtins.html#object">object</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HDKey-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="HDKey-__init__"><strong>__init__</strong></a>(self, key, chain_code, index, depth, parent_fingerprint)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="HDKey-to_b58check"><strong>to_b58check</strong></a>(self, testnet=False)</dt><dd><tt>Generates&nbsp;a&nbsp;Base58Check&nbsp;encoding&nbsp;of&nbsp;this&nbsp;key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;key&nbsp;is&nbsp;to&nbsp;be&nbsp;used&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testnet,&nbsp;False&nbsp;otherwise.<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="HDKey-from_b58check"><strong>from_b58check</strong></a>(key)</dt><dd><tt>Decodes&nbsp;a&nbsp;Base58Check&nbsp;encoded&nbsp;key.<br>
+&nbsp;<br>
+The&nbsp;encoding&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(str):&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDKey-from_bytes"><strong>from_bytes</strong></a>(b)</dt><dd><tt>Generates&nbsp;either&nbsp;a&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>&nbsp;from&nbsp;the&nbsp;underlying<br>
+bytes.<br>
+&nbsp;<br>
+The&nbsp;serialization&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;byte&nbsp;stream&nbsp;conforming&nbsp;to&nbsp;the&nbsp;above.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDKey-from_hex"><strong>from_hex</strong></a>(h)</dt><dd><tt>Generates&nbsp;either&nbsp;a&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>&nbsp;from&nbsp;the&nbsp;underlying<br>
+hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;serialization&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string&nbsp;conforming&nbsp;to&nbsp;the&nbsp;above.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDKey-from_path"><strong>from_path</strong></a>(root_key, path)</dt></dl>
+
+<dl><dt><a name="HDKey-parse_path"><strong>parse_path</strong></a>(path)</dt></dl>
+
+<dl><dt><a name="HDKey-path_from_indices"><strong>path_from_indices</strong></a>(l)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>fingerprint</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;key's&nbsp;fingerprint,&nbsp;which&nbsp;is&nbsp;the&nbsp;first&nbsp;4&nbsp;bytes<br>
+of&nbsp;its&nbsp;identifier.<br>
+&nbsp;<br>
+A&nbsp;key's&nbsp;identifier&nbsp;and&nbsp;fingerprint&nbsp;are&nbsp;defined&nbsp;as:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#key-identifiers<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;The&nbsp;first&nbsp;4&nbsp;bytes&nbsp;of&nbsp;the&nbsp;RIPEMD-160&nbsp;hash.</tt></dd>
+</dl>
+<dl><dt><strong>hardened</strong></dt>
+<dd><tt>Whether&nbsp;or&nbsp;not&nbsp;this&nbsp;is&nbsp;a&nbsp;hardened&nbsp;node.<br>
+&nbsp;<br>
+Hardened&nbsp;nodes&nbsp;are&nbsp;those&nbsp;with&nbsp;indices&nbsp;&gt;=&nbsp;0x80000000.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;True&nbsp;if&nbsp;this&nbsp;is&nbsp;hardened,&nbsp;False&nbsp;otherwise.</tt></dd>
+</dl>
+<dl><dt><strong>identifier</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;identifier&nbsp;for&nbsp;the&nbsp;key.<br>
+&nbsp;<br>
+A&nbsp;key's&nbsp;identifier&nbsp;and&nbsp;fingerprint&nbsp;are&nbsp;defined&nbsp;as:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#key-identifiers<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;A&nbsp;20-byte&nbsp;RIPEMD-160&nbsp;hash.</tt></dd>
+</dl>
+<dl><dt><strong>master</strong></dt>
+<dd><tt>Whether&nbsp;or&nbsp;not&nbsp;this&nbsp;is&nbsp;a&nbsp;master&nbsp;node.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;True&nbsp;if&nbsp;this&nbsp;is&nbsp;a&nbsp;master&nbsp;node,&nbsp;False&nbsp;otherwise.</tt></dd>
+</dl>
+<dl><dt><strong>testnet_bytes</strong></dt>
+<dd><tt>Serialization&nbsp;of&nbsp;the&nbsp;key&nbsp;for&nbsp;testnet.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;78-byte&nbsp;serialization&nbsp;of&nbsp;the&nbsp;key,&nbsp;specifically&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(i.e.&nbsp;the&nbsp;first&nbsp;2&nbsp;bytes&nbsp;will&nbsp;be&nbsp;0x0435).</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HDPrivateKey">class <strong>HDPrivateKey</strong></a>(<a href="aquachain.bip44.html#HDKey">HDKey</a>, <a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Implements&nbsp;an&nbsp;HD&nbsp;Private&nbsp;Key&nbsp;according&nbsp;to&nbsp;BIP-0032:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki<br>
+&nbsp;<br>
+For&nbsp;the&nbsp;vast&nbsp;majority&nbsp;of&nbsp;use&nbsp;cases,&nbsp;the&nbsp;3&nbsp;static&nbsp;functions<br>
+(<a href="#HDPrivateKey">HDPrivateKey</a>.master_key_from_entropy,<br>
+<a href="#HDPrivateKey">HDPrivateKey</a>.master_key_from_seed&nbsp;and<br>
+<a href="#HDPrivateKey">HDPrivateKey</a>.from_parent)&nbsp;will&nbsp;be&nbsp;used&nbsp;rather&nbsp;than&nbsp;directly<br>
+constructing&nbsp;an&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(<a href="#PrivateKey">PrivateKey</a>&nbsp;or&nbsp;<a href="#PublicKey">PublicKey</a>):&nbsp;The&nbsp;underlying&nbsp;simple&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;that&nbsp;is&nbsp;used&nbsp;to&nbsp;sign/verify.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chain_code&nbsp;(bytes):&nbsp;The&nbsp;chain&nbsp;code&nbsp;associated&nbsp;with&nbsp;the&nbsp;HD&nbsp;key.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;depth&nbsp;(int):&nbsp;How&nbsp;many&nbsp;levels&nbsp;below&nbsp;the&nbsp;master&nbsp;node&nbsp;this&nbsp;key&nbsp;is.&nbsp;By<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;definition,&nbsp;depth&nbsp;=&nbsp;0&nbsp;for&nbsp;the&nbsp;master&nbsp;node.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;(int):&nbsp;A&nbsp;value&nbsp;between&nbsp;0&nbsp;and&nbsp;0xffffffff&nbsp;indicating&nbsp;the&nbsp;child<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number.&nbsp;Values&nbsp;&gt;=&nbsp;0x80000000&nbsp;are&nbsp;considered&nbsp;hardened&nbsp;children.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent_fingerprint&nbsp;(bytes):&nbsp;The&nbsp;fingerprint&nbsp;of&nbsp;the&nbsp;parent&nbsp;node.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;0x00000000&nbsp;for&nbsp;the&nbsp;master&nbsp;node.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDKey">HDKey</a>:&nbsp;An&nbsp;<a href="#HDKey">HDKey</a>&nbsp;<a href="builtins.html#object">object</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="aquachain.bip44.html#HDPrivateKey">HDPrivateKey</a></dd>
+<dd><a href="aquachain.bip44.html#HDKey">HDKey</a></dd>
+<dd><a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="HDPrivateKey-__init__"><strong>__init__</strong></a>(self, key, chain_code, index, depth, parent_fingerprint=b'\x00\x00\x00\x00')</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="HDPrivateKey-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="HDPrivateKey-from_parent"><strong>from_parent</strong></a>(parent_key, i)</dt><dd><tt>Derives&nbsp;a&nbsp;child&nbsp;private&nbsp;key&nbsp;from&nbsp;a&nbsp;parent<br>
+private&nbsp;key.&nbsp;It&nbsp;is&nbsp;not&nbsp;possible&nbsp;to&nbsp;derive&nbsp;a&nbsp;child<br>
+private&nbsp;key&nbsp;from&nbsp;a&nbsp;public&nbsp;parent&nbsp;key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent_private_key&nbsp;(<a href="#HDPrivateKey">HDPrivateKey</a>):</tt></dd></dl>
+
+<dl><dt><a name="HDPrivateKey-master_key_from_mnemonic"><strong>master_key_from_mnemonic</strong></a>(mnemonic, passphrase='')</dt><dd><tt>Generates&nbsp;a&nbsp;master&nbsp;key&nbsp;from&nbsp;a&nbsp;mnemonic.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mnemonic&nbsp;(str):&nbsp;The&nbsp;mnemonic&nbsp;sentence&nbsp;representing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;seed&nbsp;from&nbsp;which&nbsp;to&nbsp;generate&nbsp;the&nbsp;master&nbsp;key.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;passphrase&nbsp;(str):&nbsp;Password&nbsp;if&nbsp;one&nbsp;was&nbsp;used.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>:&nbsp;the&nbsp;master&nbsp;private&nbsp;key.</tt></dd></dl>
+
+<dl><dt><a name="HDPrivateKey-master_key_from_seed"><strong>master_key_from_seed</strong></a>(seed)</dt><dd><tt>Generates&nbsp;a&nbsp;master&nbsp;key&nbsp;from&nbsp;a&nbsp;provided&nbsp;seed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seed&nbsp;(bytes&nbsp;or&nbsp;str):&nbsp;a&nbsp;string&nbsp;of&nbsp;bytes&nbsp;or&nbsp;a&nbsp;hex&nbsp;string<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>:&nbsp;the&nbsp;master&nbsp;private&nbsp;key.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>identifier</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;identifier&nbsp;for&nbsp;the&nbsp;key.<br>
+&nbsp;<br>
+A&nbsp;key's&nbsp;identifier&nbsp;and&nbsp;fingerprint&nbsp;are&nbsp;defined&nbsp;as:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#key-identifiers<br>
+&nbsp;<br>
+In&nbsp;this&nbsp;case,&nbsp;it&nbsp;will&nbsp;return&nbsp;the&nbsp;RIPEMD-160&nbsp;hash&nbsp;of&nbsp;the<br>
+corresponding&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;A&nbsp;20-byte&nbsp;RIPEMD-160&nbsp;hash.</tt></dd>
+</dl>
+<dl><dt><strong>public_key</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;public&nbsp;key&nbsp;associated&nbsp;with&nbsp;this&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;HDPublicKey:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;HDPublicKey&nbsp;object&nbsp;that&nbsp;corresponds&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;key.</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MAINNET_VERSION</strong> = 76066276</dl>
+
+<dl><dt><strong>TESTNET_VERSION</strong> = 70615956</dl>
+
+<hr>
+Methods inherited from <a href="aquachain.bip44.html#HDKey">HDKey</a>:<br>
+<dl><dt><a name="HDPrivateKey-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="HDPrivateKey-to_b58check"><strong>to_b58check</strong></a>(self, testnet=False)</dt><dd><tt>Generates&nbsp;a&nbsp;Base58Check&nbsp;encoding&nbsp;of&nbsp;this&nbsp;key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;key&nbsp;is&nbsp;to&nbsp;be&nbsp;used&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testnet,&nbsp;False&nbsp;otherwise.<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="aquachain.bip44.html#HDKey">HDKey</a>:<br>
+<dl><dt><a name="HDPrivateKey-from_b58check"><strong>from_b58check</strong></a>(key)</dt><dd><tt>Decodes&nbsp;a&nbsp;Base58Check&nbsp;encoded&nbsp;key.<br>
+&nbsp;<br>
+The&nbsp;encoding&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(str):&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDPrivateKey-from_bytes"><strong>from_bytes</strong></a>(b)</dt><dd><tt>Generates&nbsp;either&nbsp;a&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>&nbsp;from&nbsp;the&nbsp;underlying<br>
+bytes.<br>
+&nbsp;<br>
+The&nbsp;serialization&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;byte&nbsp;stream&nbsp;conforming&nbsp;to&nbsp;the&nbsp;above.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDPrivateKey-from_hex"><strong>from_hex</strong></a>(h)</dt><dd><tt>Generates&nbsp;either&nbsp;a&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>&nbsp;from&nbsp;the&nbsp;underlying<br>
+hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;serialization&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string&nbsp;conforming&nbsp;to&nbsp;the&nbsp;above.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDPrivateKey-from_path"><strong>from_path</strong></a>(root_key, path)</dt></dl>
+
+<dl><dt><a name="HDPrivateKey-parse_path"><strong>parse_path</strong></a>(path)</dt></dl>
+
+<dl><dt><a name="HDPrivateKey-path_from_indices"><strong>path_from_indices</strong></a>(l)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="aquachain.bip44.html#HDKey">HDKey</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>fingerprint</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;key's&nbsp;fingerprint,&nbsp;which&nbsp;is&nbsp;the&nbsp;first&nbsp;4&nbsp;bytes<br>
+of&nbsp;its&nbsp;identifier.<br>
+&nbsp;<br>
+A&nbsp;key's&nbsp;identifier&nbsp;and&nbsp;fingerprint&nbsp;are&nbsp;defined&nbsp;as:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#key-identifiers<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;The&nbsp;first&nbsp;4&nbsp;bytes&nbsp;of&nbsp;the&nbsp;RIPEMD-160&nbsp;hash.</tt></dd>
+</dl>
+<dl><dt><strong>hardened</strong></dt>
+<dd><tt>Whether&nbsp;or&nbsp;not&nbsp;this&nbsp;is&nbsp;a&nbsp;hardened&nbsp;node.<br>
+&nbsp;<br>
+Hardened&nbsp;nodes&nbsp;are&nbsp;those&nbsp;with&nbsp;indices&nbsp;&gt;=&nbsp;0x80000000.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;True&nbsp;if&nbsp;this&nbsp;is&nbsp;hardened,&nbsp;False&nbsp;otherwise.</tt></dd>
+</dl>
+<dl><dt><strong>master</strong></dt>
+<dd><tt>Whether&nbsp;or&nbsp;not&nbsp;this&nbsp;is&nbsp;a&nbsp;master&nbsp;node.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;True&nbsp;if&nbsp;this&nbsp;is&nbsp;a&nbsp;master&nbsp;node,&nbsp;False&nbsp;otherwise.</tt></dd>
+</dl>
+<dl><dt><strong>testnet_bytes</strong></dt>
+<dd><tt>Serialization&nbsp;of&nbsp;the&nbsp;key&nbsp;for&nbsp;testnet.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;78-byte&nbsp;serialization&nbsp;of&nbsp;the&nbsp;key,&nbsp;specifically&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(i.e.&nbsp;the&nbsp;first&nbsp;2&nbsp;bytes&nbsp;will&nbsp;be&nbsp;0x0435).</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a>:<br>
+<dl><dt><a name="HDPrivateKey-to_hex"><strong>to_hex</strong></a>(self)</dt><dd><tt>Generates&nbsp;a&nbsp;hex&nbsp;encoding&nbsp;of&nbsp;the&nbsp;serialized&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;hex&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HDPublicKey">class <strong>HDPublicKey</strong></a>(<a href="aquachain.bip44.html#HDKey">HDKey</a>, <a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Implements&nbsp;an&nbsp;HD&nbsp;Public&nbsp;Key&nbsp;according&nbsp;to&nbsp;BIP-0032:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki<br>
+&nbsp;<br>
+For&nbsp;the&nbsp;vast&nbsp;majority&nbsp;of&nbsp;use&nbsp;cases,&nbsp;the&nbsp;static&nbsp;function<br>
+<a href="#HDPublicKey">HDPublicKey</a>.<a href="#HDPublicKey-from_parent">from_parent</a>()&nbsp;will&nbsp;be&nbsp;used&nbsp;rather&nbsp;than&nbsp;directly<br>
+constructing&nbsp;an&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;(int):&nbsp;x&nbsp;component&nbsp;of&nbsp;the&nbsp;point&nbsp;representing&nbsp;the&nbsp;public&nbsp;key.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;(int):&nbsp;y&nbsp;component&nbsp;of&nbsp;the&nbsp;point&nbsp;representing&nbsp;the&nbsp;public&nbsp;key.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chain_code&nbsp;(bytes):&nbsp;The&nbsp;chain&nbsp;code&nbsp;associated&nbsp;with&nbsp;the&nbsp;HD&nbsp;key.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;depth&nbsp;(int):&nbsp;How&nbsp;many&nbsp;levels&nbsp;below&nbsp;the&nbsp;master&nbsp;node&nbsp;this&nbsp;key&nbsp;is.&nbsp;By<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;definition,&nbsp;depth&nbsp;=&nbsp;0&nbsp;for&nbsp;the&nbsp;master&nbsp;node.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;(int):&nbsp;A&nbsp;value&nbsp;between&nbsp;0&nbsp;and&nbsp;0xffffffff&nbsp;indicating&nbsp;the&nbsp;child<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number.&nbsp;Values&nbsp;&gt;=&nbsp;0x80000000&nbsp;are&nbsp;considered&nbsp;hardened&nbsp;children.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent_fingerprint&nbsp;(bytes):&nbsp;The&nbsp;fingerprint&nbsp;of&nbsp;the&nbsp;parent&nbsp;node.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;0x00000000&nbsp;for&nbsp;the&nbsp;master&nbsp;node.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:&nbsp;An&nbsp;<a href="#HDPublicKey">HDPublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="aquachain.bip44.html#HDPublicKey">HDPublicKey</a></dd>
+<dd><a href="aquachain.bip44.html#HDKey">HDKey</a></dd>
+<dd><a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="HDPublicKey-__init__"><strong>__init__</strong></a>(self, x, y, chain_code, index, depth, parent_fingerprint=b'\x00\x00\x00\x00')</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="HDPublicKey-address"><strong>address</strong></a>(self, compressed=True, testnet=False)</dt><dd><tt>Address&nbsp;property&nbsp;that&nbsp;returns&nbsp;the&nbsp;Base58Check<br>
+encoded&nbsp;version&nbsp;of&nbsp;the&nbsp;HASH160.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;compressed&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;compressed&nbsp;key&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;key&nbsp;is&nbsp;intended&nbsp;for&nbsp;testnet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usage.&nbsp;False&nbsp;indicates&nbsp;mainnet&nbsp;usage.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;Base58Check&nbsp;encoded&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="HDPublicKey-hash160"><strong>hash160</strong></a>(self, compressed=True)</dt><dd><tt>Return&nbsp;the&nbsp;RIPEMD-160&nbsp;hash&nbsp;of&nbsp;the&nbsp;SHA-256&nbsp;hash&nbsp;of&nbsp;the<br>
+non-extended&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Note:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;always&nbsp;returns&nbsp;the&nbsp;hash&nbsp;of&nbsp;the&nbsp;compressed&nbsp;version&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;RIPEMD-160&nbsp;byte&nbsp;string.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="HDPublicKey-from_parent"><strong>from_parent</strong></a>(parent_key, i)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>compressed_bytes</strong></dt>
+<dd><tt>Byte&nbsp;string&nbsp;corresponding&nbsp;to&nbsp;a&nbsp;compressed&nbsp;representation<br>
+of&nbsp;this&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;33-byte&nbsp;long&nbsp;byte&nbsp;string.</tt></dd>
+</dl>
+<dl><dt><strong>identifier</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;identifier&nbsp;for&nbsp;the&nbsp;key.<br>
+&nbsp;<br>
+A&nbsp;key's&nbsp;identifier&nbsp;and&nbsp;fingerprint&nbsp;are&nbsp;defined&nbsp;as:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#key-identifiers<br>
+&nbsp;<br>
+In&nbsp;this&nbsp;case,&nbsp;it&nbsp;will&nbsp;return&nbsp;the&nbsp;RIPEMD-160&nbsp;hash&nbsp;of&nbsp;the<br>
+non-extended&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;A&nbsp;20-byte&nbsp;RIPEMD-160&nbsp;hash.</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MAINNET_VERSION</strong> = 76067358</dl>
+
+<dl><dt><strong>TESTNET_VERSION</strong> = 70617039</dl>
+
+<hr>
+Methods inherited from <a href="aquachain.bip44.html#HDKey">HDKey</a>:<br>
+<dl><dt><a name="HDPublicKey-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="HDPublicKey-to_b58check"><strong>to_b58check</strong></a>(self, testnet=False)</dt><dd><tt>Generates&nbsp;a&nbsp;Base58Check&nbsp;encoding&nbsp;of&nbsp;this&nbsp;key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;key&nbsp;is&nbsp;to&nbsp;be&nbsp;used&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testnet,&nbsp;False&nbsp;otherwise.<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="aquachain.bip44.html#HDKey">HDKey</a>:<br>
+<dl><dt><a name="HDPublicKey-from_b58check"><strong>from_b58check</strong></a>(key)</dt><dd><tt>Decodes&nbsp;a&nbsp;Base58Check&nbsp;encoded&nbsp;key.<br>
+&nbsp;<br>
+The&nbsp;encoding&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(str):&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDPublicKey-from_bytes"><strong>from_bytes</strong></a>(b)</dt><dd><tt>Generates&nbsp;either&nbsp;a&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>&nbsp;from&nbsp;the&nbsp;underlying<br>
+bytes.<br>
+&nbsp;<br>
+The&nbsp;serialization&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;byte&nbsp;stream&nbsp;conforming&nbsp;to&nbsp;the&nbsp;above.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDPublicKey-from_hex"><strong>from_hex</strong></a>(h)</dt><dd><tt>Generates&nbsp;either&nbsp;a&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>&nbsp;from&nbsp;the&nbsp;underlying<br>
+hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;serialization&nbsp;must&nbsp;conform&nbsp;to&nbsp;the&nbsp;description&nbsp;in:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#serialization-format<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string&nbsp;conforming&nbsp;to&nbsp;the&nbsp;above.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>&nbsp;or&nbsp;<a href="#HDPublicKey">HDPublicKey</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Either&nbsp;an&nbsp;HD&nbsp;private&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>,&nbsp;depending&nbsp;on&nbsp;what&nbsp;was&nbsp;serialized.</tt></dd></dl>
+
+<dl><dt><a name="HDPublicKey-from_path"><strong>from_path</strong></a>(root_key, path)</dt></dl>
+
+<dl><dt><a name="HDPublicKey-parse_path"><strong>parse_path</strong></a>(path)</dt></dl>
+
+<dl><dt><a name="HDPublicKey-path_from_indices"><strong>path_from_indices</strong></a>(l)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="aquachain.bip44.html#HDKey">HDKey</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>fingerprint</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;key's&nbsp;fingerprint,&nbsp;which&nbsp;is&nbsp;the&nbsp;first&nbsp;4&nbsp;bytes<br>
+of&nbsp;its&nbsp;identifier.<br>
+&nbsp;<br>
+A&nbsp;key's&nbsp;identifier&nbsp;and&nbsp;fingerprint&nbsp;are&nbsp;defined&nbsp;as:<br>
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#key-identifiers<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;The&nbsp;first&nbsp;4&nbsp;bytes&nbsp;of&nbsp;the&nbsp;RIPEMD-160&nbsp;hash.</tt></dd>
+</dl>
+<dl><dt><strong>hardened</strong></dt>
+<dd><tt>Whether&nbsp;or&nbsp;not&nbsp;this&nbsp;is&nbsp;a&nbsp;hardened&nbsp;node.<br>
+&nbsp;<br>
+Hardened&nbsp;nodes&nbsp;are&nbsp;those&nbsp;with&nbsp;indices&nbsp;&gt;=&nbsp;0x80000000.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;True&nbsp;if&nbsp;this&nbsp;is&nbsp;hardened,&nbsp;False&nbsp;otherwise.</tt></dd>
+</dl>
+<dl><dt><strong>master</strong></dt>
+<dd><tt>Whether&nbsp;or&nbsp;not&nbsp;this&nbsp;is&nbsp;a&nbsp;master&nbsp;node.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool:&nbsp;True&nbsp;if&nbsp;this&nbsp;is&nbsp;a&nbsp;master&nbsp;node,&nbsp;False&nbsp;otherwise.</tt></dd>
+</dl>
+<dl><dt><strong>testnet_bytes</strong></dt>
+<dd><tt>Serialization&nbsp;of&nbsp;the&nbsp;key&nbsp;for&nbsp;testnet.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;78-byte&nbsp;serialization&nbsp;of&nbsp;the&nbsp;key,&nbsp;specifically&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(i.e.&nbsp;the&nbsp;first&nbsp;2&nbsp;bytes&nbsp;will&nbsp;be&nbsp;0x0435).</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>:<br>
+<dl><dt><a name="HDPublicKey-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="HDPublicKey-to_hex"><strong>to_hex</strong></a>(self)</dt><dd><tt>Hex&nbsp;representation&nbsp;of&nbsp;the&nbsp;serialized&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="HDPublicKey-verify"><strong>verify</strong></a>(self, message, signature, do_hash=True)</dt><dd><tt>Verifies&nbsp;that&nbsp;message&nbsp;was&nbsp;appropriately&nbsp;signed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(bytes):&nbsp;The&nbsp;message&nbsp;to&nbsp;be&nbsp;verified.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;signature&nbsp;(<a href="#Signature">Signature</a>):&nbsp;A&nbsp;signature&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;do_hash&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;message&nbsp;should&nbsp;be&nbsp;hashed&nbsp;prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;signing,&nbsp;False&nbsp;if&nbsp;not.&nbsp;This&nbsp;should&nbsp;always&nbsp;be&nbsp;left&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;except&nbsp;in&nbsp;special&nbsp;situations&nbsp;which&nbsp;require&nbsp;doing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;hash&nbsp;outside&nbsp;(e.g.&nbsp;handling&nbsp;Bitcoin&nbsp;bugs).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;verified&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;signature&nbsp;is&nbsp;verified,&nbsp;False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>:<br>
+<dl><dt><a name="HDPublicKey-from_private_key"><strong>from_private_key</strong></a>(private_key)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private_key&nbsp;(<a href="#PrivateKey">PrivateKey</a>):&nbsp;The&nbsp;private&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;to&nbsp;derive&nbsp;this&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PrivateKey">class <strong>PrivateKey</strong></a>(<a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Encapsulation&nbsp;of&nbsp;a&nbsp;Bitcoin&nbsp;ECDSA&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;provides&nbsp;capability&nbsp;to&nbsp;generate&nbsp;private&nbsp;keys,<br>
+obtain&nbsp;the&nbsp;corresponding&nbsp;public&nbsp;key,&nbsp;sign&nbsp;messages&nbsp;and<br>
+serialize/deserialize&nbsp;into&nbsp;a&nbsp;variety&nbsp;of&nbsp;formats.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;k&nbsp;(int):&nbsp;The&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PrivateKey">PrivateKey</a>:&nbsp;The&nbsp;<a href="builtins.html#object">object</a>&nbsp;representing&nbsp;the&nbsp;private&nbsp;key.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="aquachain.bip44.html#PrivateKey">PrivateKey</a></dd>
+<dd><a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PrivateKey-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PrivateKey-__init__"><strong>__init__</strong></a>(self, k)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PrivateKey-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PrivateKey-to_b58check"><strong>to_b58check</strong></a>(self, testnet=False)</dt><dd><tt>Generates&nbsp;a&nbsp;Base58Check&nbsp;encoding&nbsp;of&nbsp;this&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="PrivateKey-from_b58check"><strong>from_b58check</strong></a>(private_key)</dt><dd><tt>Decodes&nbsp;a&nbsp;Base58Check&nbsp;encoded&nbsp;private-key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private_key&nbsp;(str):&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PrivateKey">PrivateKey</a>:&nbsp;A&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;<a href="builtins.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="PrivateKey-from_bytes"><strong>from_bytes</strong></a>(b)</dt><dd><tt>Generates&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;from&nbsp;the&nbsp;underlying&nbsp;bytes.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;byte&nbsp;stream&nbsp;containing&nbsp;a&nbsp;256-bit&nbsp;(32-byte)&nbsp;integer.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple(<a href="#PrivateKey">PrivateKey</a>,&nbsp;bytes):&nbsp;A&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;the&nbsp;remainder<br>
+&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;bytes.</tt></dd></dl>
+
+<dl><dt><a name="PrivateKey-from_hex"><strong>from_hex</strong></a>(h)</dt><dd><tt>Generates&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;from&nbsp;a&nbsp;hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string&nbsp;containing&nbsp;a&nbsp;256-bit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(32-byte)&nbsp;integer.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PrivateKey">PrivateKey</a>:&nbsp;A&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="PrivateKey-from_int"><strong>from_int</strong></a>(i)</dt><dd><tt>Initializes&nbsp;a&nbsp;private&nbsp;key&nbsp;from&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;(int):&nbsp;Integer&nbsp;that&nbsp;is&nbsp;the&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PrivateKey">PrivateKey</a>:&nbsp;The&nbsp;<a href="builtins.html#object">object</a>&nbsp;representing&nbsp;the&nbsp;private&nbsp;key.</tt></dd></dl>
+
+<dl><dt><a name="PrivateKey-from_random"><strong>from_random</strong></a>()</dt><dd><tt>Initializes&nbsp;a&nbsp;private&nbsp;key&nbsp;from&nbsp;a&nbsp;random&nbsp;integer.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PrivateKey">PrivateKey</a>:&nbsp;The&nbsp;<a href="builtins.html#object">object</a>&nbsp;representing&nbsp;the&nbsp;private&nbsp;key.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>public_key</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;public&nbsp;key&nbsp;associated&nbsp;with&nbsp;this&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PublicKey:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;PublicKey&nbsp;object&nbsp;that&nbsp;corresponds&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;key.</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MAINNET_VERSION</strong> = 128</dl>
+
+<dl><dt><strong>TESTNET_VERSION</strong> = 239</dl>
+
+<hr>
+Methods inherited from <a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a>:<br>
+<dl><dt><a name="PrivateKey-to_hex"><strong>to_hex</strong></a>(self)</dt><dd><tt>Generates&nbsp;a&nbsp;hex&nbsp;encoding&nbsp;of&nbsp;the&nbsp;serialized&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;hex&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="aquachain.bip44.html#PrivateKeyBase">PrivateKeyBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PrivateKeyBase">class <strong>PrivateKeyBase</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;both&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;and&nbsp;<a href="#HDPrivateKey">HDPrivateKey</a>.<br>
+&nbsp;<br>
+As&nbsp;this&nbsp;class&nbsp;is&nbsp;a&nbsp;base&nbsp;class&nbsp;it&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;directly.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;k&nbsp;(int):&nbsp;The&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PrivateKey">PrivateKey</a>:&nbsp;The&nbsp;<a href="builtins.html#object">object</a>&nbsp;representing&nbsp;the&nbsp;private&nbsp;key.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="PrivateKeyBase-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PrivateKeyBase-__init__"><strong>__init__</strong></a>(self, k)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PrivateKeyBase-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PrivateKeyBase-to_b58check"><strong>to_b58check</strong></a>(self, testnet=False)</dt><dd><tt>Generates&nbsp;a&nbsp;Base58Check&nbsp;encoding&nbsp;of&nbsp;this&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+<dl><dt><a name="PrivateKeyBase-to_hex"><strong>to_hex</strong></a>(self)</dt><dd><tt>Generates&nbsp;a&nbsp;hex&nbsp;encoding&nbsp;of&nbsp;the&nbsp;serialized&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;hex&nbsp;encoded&nbsp;string&nbsp;representing&nbsp;the&nbsp;key.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="PrivateKeyBase-from_b58check"><strong>from_b58check</strong></a>(private_key)</dt><dd><tt>Decodes&nbsp;a&nbsp;Base58Check&nbsp;encoded&nbsp;private-key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private_key&nbsp;(str):&nbsp;A&nbsp;Base58Check&nbsp;encoded&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PrivateKey">PrivateKey</a>:&nbsp;A&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;<a href="builtins.html#object">object</a></tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>public_key</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;public&nbsp;key&nbsp;associated&nbsp;with&nbsp;this&nbsp;private&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PublicKey:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;PublicKey&nbsp;object&nbsp;that&nbsp;corresponds&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;key.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PublicKey">class <strong>PublicKey</strong></a>(<a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Encapsulation&nbsp;of&nbsp;a&nbsp;Bitcoin&nbsp;ECDSA&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;provides&nbsp;a&nbsp;high-level&nbsp;API&nbsp;to&nbsp;using&nbsp;an&nbsp;ECDSA&nbsp;public<br>
+key,&nbsp;specifically&nbsp;for&nbsp;Bitcoin&nbsp;(secp256k1)&nbsp;purposes.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;(int):&nbsp;The&nbsp;x&nbsp;component&nbsp;of&nbsp;the&nbsp;public&nbsp;key&nbsp;point.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;(int):&nbsp;The&nbsp;y&nbsp;component&nbsp;of&nbsp;the&nbsp;public&nbsp;key&nbsp;point.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;The&nbsp;<a href="builtins.html#object">object</a>&nbsp;representing&nbsp;the&nbsp;public&nbsp;key.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="aquachain.bip44.html#PublicKey">PublicKey</a></dd>
+<dd><a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PublicKey-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PublicKey-__init__"><strong>__init__</strong></a>(self, x, y)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PublicKey-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PublicKey-address"><strong>address</strong></a>(self, compressed=True, testnet=False)</dt><dd><tt>Address&nbsp;property&nbsp;that&nbsp;returns&nbsp;the&nbsp;Base58Check<br>
+encoded&nbsp;version&nbsp;of&nbsp;the&nbsp;HASH160.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;compressed&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;compressed&nbsp;key&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;key&nbsp;is&nbsp;intended&nbsp;for&nbsp;testnet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usage.&nbsp;False&nbsp;indicates&nbsp;mainnet&nbsp;usage.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;Base58Check&nbsp;encoded&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="PublicKey-hash160"><strong>hash160</strong></a>(self, compressed=True)</dt><dd><tt>Return&nbsp;the&nbsp;RIPEMD-160&nbsp;hash&nbsp;of&nbsp;the&nbsp;SHA-256&nbsp;hash&nbsp;of&nbsp;the<br>
+public&nbsp;key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;compressed&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;compressed&nbsp;key&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;used.<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;RIPEMD-160&nbsp;byte&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="PublicKey-to_base64"><strong>to_base64</strong></a>(self)</dt><dd><tt>Hex&nbsp;representation&nbsp;of&nbsp;the&nbsp;serialized&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(str):&nbsp;A&nbsp;Base64-encoded&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="PublicKey-verify"><strong>verify</strong></a>(self, message, signature, do_hash=True)</dt><dd><tt>Verifies&nbsp;that&nbsp;message&nbsp;was&nbsp;appropriately&nbsp;signed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(bytes):&nbsp;The&nbsp;message&nbsp;to&nbsp;be&nbsp;verified.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;signature&nbsp;(<a href="#Signature">Signature</a>):&nbsp;A&nbsp;signature&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;do_hash&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;message&nbsp;should&nbsp;be&nbsp;hashed&nbsp;prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;signing,&nbsp;False&nbsp;if&nbsp;not.&nbsp;This&nbsp;should&nbsp;always&nbsp;be&nbsp;left&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;except&nbsp;in&nbsp;special&nbsp;situations&nbsp;which&nbsp;require&nbsp;doing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;hash&nbsp;outside&nbsp;(e.g.&nbsp;handling&nbsp;Bitcoin&nbsp;bugs).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;verified&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;signature&nbsp;is&nbsp;verified,&nbsp;False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="PublicKey-from_base64"><strong>from_base64</strong></a>(b64str, testnet=False)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;Base64&nbsp;encoded&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b64str&nbsp;(str):&nbsp;A&nbsp;Base64-encoded&nbsp;string.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(bool)&nbsp;(Optional):&nbsp;If&nbsp;True,&nbsp;changes&nbsp;the&nbsp;version&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;prepended&nbsp;to&nbsp;the&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="PublicKey-from_bytes"><strong>from_bytes</strong></a>(key_bytes)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;byte&nbsp;(or&nbsp;hex)&nbsp;string.<br>
+&nbsp;<br>
+The&nbsp;byte&nbsp;stream&nbsp;must&nbsp;be&nbsp;of&nbsp;the&nbsp;SEC&nbsp;variety<br>
+(<a href="http://www.secg.org/">http://www.secg.org/</a>):&nbsp;beginning&nbsp;with&nbsp;a&nbsp;single&nbsp;byte&nbsp;telling<br>
+what&nbsp;key&nbsp;representation&nbsp;follows.&nbsp;A&nbsp;full,&nbsp;uncompressed&nbsp;key<br>
+is&nbsp;represented&nbsp;by:&nbsp;0x04&nbsp;followed&nbsp;by&nbsp;64&nbsp;bytes&nbsp;containing<br>
+the&nbsp;x&nbsp;and&nbsp;y&nbsp;components&nbsp;of&nbsp;the&nbsp;point.&nbsp;For&nbsp;compressed&nbsp;keys<br>
+with&nbsp;an&nbsp;even&nbsp;y&nbsp;component,&nbsp;0x02&nbsp;is&nbsp;followed&nbsp;by&nbsp;32&nbsp;bytes<br>
+containing&nbsp;the&nbsp;x&nbsp;component.&nbsp;For&nbsp;compressed&nbsp;keys&nbsp;with&nbsp;an<br>
+odd&nbsp;y&nbsp;component,&nbsp;0x03&nbsp;is&nbsp;followed&nbsp;by&nbsp;32&nbsp;bytes&nbsp;containing<br>
+the&nbsp;x&nbsp;component.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key_bytes&nbsp;(bytes&nbsp;or&nbsp;str):&nbsp;A&nbsp;byte&nbsp;stream&nbsp;that&nbsp;conforms&nbsp;to&nbsp;the&nbsp;above.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="PublicKey-from_hex"><strong>from_hex</strong></a>(h)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+See&nbsp;<a href="#PublicKey-from_bytes">from_bytes</a>()&nbsp;for&nbsp;requirements&nbsp;of&nbsp;the&nbsp;hex&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="PublicKey-from_point"><strong>from_point</strong></a>(p)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;any&nbsp;<a href="builtins.html#object">object</a><br>
+containing&nbsp;x,&nbsp;y&nbsp;coordinates.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p&nbsp;(Point):&nbsp;An&nbsp;<a href="builtins.html#object">object</a>&nbsp;containing&nbsp;a&nbsp;two-dimensional,&nbsp;affine<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;representation&nbsp;of&nbsp;a&nbsp;point&nbsp;on&nbsp;the&nbsp;secp256k1&nbsp;curve.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>compressed_bytes</strong></dt>
+<dd><tt>Byte&nbsp;string&nbsp;corresponding&nbsp;to&nbsp;a&nbsp;compressed&nbsp;representation<br>
+of&nbsp;this&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;33-byte&nbsp;long&nbsp;byte&nbsp;string.</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>MAINNET_VERSION</strong> = 0</dl>
+
+<dl><dt><strong>TESTNET_VERSION</strong> = 111</dl>
+
+<hr>
+Methods inherited from <a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>:<br>
+<dl><dt><a name="PublicKey-to_hex"><strong>to_hex</strong></a>(self)</dt><dd><tt>Hex&nbsp;representation&nbsp;of&nbsp;the&nbsp;serialized&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>:<br>
+<dl><dt><a name="PublicKey-from_private_key"><strong>from_private_key</strong></a>(private_key)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private_key&nbsp;(<a href="#PrivateKey">PrivateKey</a>):&nbsp;The&nbsp;private&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;to&nbsp;derive&nbsp;this&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="aquachain.bip44.html#PublicKeyBase">PublicKeyBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PublicKeyBase">class <strong>PublicKeyBase</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;both&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;and&nbsp;<a href="#HDPublicKey">HDPublicKey</a>.<br>
+&nbsp;<br>
+As&nbsp;this&nbsp;class&nbsp;is&nbsp;a&nbsp;base&nbsp;class&nbsp;it&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;directly.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;(int):&nbsp;The&nbsp;x&nbsp;component&nbsp;of&nbsp;the&nbsp;public&nbsp;key&nbsp;point.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;(int):&nbsp;The&nbsp;y&nbsp;component&nbsp;of&nbsp;the&nbsp;public&nbsp;key&nbsp;point.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;The&nbsp;<a href="builtins.html#object">object</a>&nbsp;representing&nbsp;the&nbsp;public&nbsp;key.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="PublicKeyBase-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PublicKeyBase-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PublicKeyBase-__int__"><strong>__int__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PublicKeyBase-address"><strong>address</strong></a>(self, compressed=True, testnet=False)</dt><dd><tt>Address&nbsp;property&nbsp;that&nbsp;returns&nbsp;the&nbsp;Base58Check<br>
+encoded&nbsp;version&nbsp;of&nbsp;the&nbsp;HASH160.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;compressed&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;compressed&nbsp;key&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;testnet&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;key&nbsp;is&nbsp;intended&nbsp;for&nbsp;testnet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usage.&nbsp;False&nbsp;indicates&nbsp;mainnet&nbsp;usage.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;Base58Check&nbsp;encoded&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="PublicKeyBase-hash160"><strong>hash160</strong></a>(self, compressed=True)</dt><dd><tt>Return&nbsp;the&nbsp;RIPEMD-160&nbsp;hash&nbsp;of&nbsp;the&nbsp;SHA-256&nbsp;hash&nbsp;of&nbsp;the<br>
+public&nbsp;key.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;compressed&nbsp;(bool):&nbsp;Whether&nbsp;or&nbsp;not&nbsp;the&nbsp;compressed&nbsp;key&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;used.<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;RIPEMD-160&nbsp;byte&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="PublicKeyBase-to_hex"><strong>to_hex</strong></a>(self)</dt><dd><tt>Hex&nbsp;representation&nbsp;of&nbsp;the&nbsp;serialized&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;hex-encoded&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="PublicKeyBase-verify"><strong>verify</strong></a>(self, message, signature, do_hash=True)</dt><dd><tt>Verifies&nbsp;that&nbsp;message&nbsp;was&nbsp;appropriately&nbsp;signed.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(bytes):&nbsp;The&nbsp;message&nbsp;to&nbsp;be&nbsp;verified.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;signature&nbsp;(<a href="#Signature">Signature</a>):&nbsp;A&nbsp;signature&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;do_hash&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;message&nbsp;should&nbsp;be&nbsp;hashed&nbsp;prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;signing,&nbsp;False&nbsp;if&nbsp;not.&nbsp;This&nbsp;should&nbsp;always&nbsp;be&nbsp;left&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;except&nbsp;in&nbsp;special&nbsp;situations&nbsp;which&nbsp;require&nbsp;doing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;hash&nbsp;outside&nbsp;(e.g.&nbsp;handling&nbsp;Bitcoin&nbsp;bugs).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;verified&nbsp;(bool):&nbsp;True&nbsp;if&nbsp;the&nbsp;signature&nbsp;is&nbsp;verified,&nbsp;False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="PublicKeyBase-from_bytes"><strong>from_bytes</strong></a>(key_bytes)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;byte&nbsp;(or&nbsp;hex)&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key_bytes&nbsp;(bytes&nbsp;or&nbsp;str):&nbsp;A&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="PublicKeyBase-from_private_key"><strong>from_private_key</strong></a>(private_key)</dt><dd><tt>Generates&nbsp;a&nbsp;public&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;<a href="#PrivateKey">PrivateKey</a>&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private_key&nbsp;(<a href="#PrivateKey">PrivateKey</a>):&nbsp;The&nbsp;private&nbsp;key&nbsp;<a href="builtins.html#object">object</a>&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;to&nbsp;derive&nbsp;this&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PublicKey">PublicKey</a>:&nbsp;A&nbsp;<a href="#PublicKey">PublicKey</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>compressed_bytes</strong></dt>
+<dd><tt>Byte&nbsp;string&nbsp;corresponding&nbsp;to&nbsp;a&nbsp;compressed&nbsp;representation<br>
+of&nbsp;this&nbsp;public&nbsp;key.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;33-byte&nbsp;long&nbsp;byte&nbsp;string.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Signature">class <strong>Signature</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Encapsulation&nbsp;of&nbsp;a&nbsp;ECDSA&nbsp;signature&nbsp;for&nbsp;Bitcoin&nbsp;purposes.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r&nbsp;(Bignum):&nbsp;r&nbsp;component&nbsp;of&nbsp;the&nbsp;signature.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;(Bignum):&nbsp;s&nbsp;component&nbsp;of&nbsp;the&nbsp;signature.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;recovery_id&nbsp;(int)&nbsp;(Optional):&nbsp;Must&nbsp;be&nbsp;between&nbsp;0&nbsp;and&nbsp;3&nbsp;specifying<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;of&nbsp;the&nbsp;public&nbsp;keys&nbsp;generated&nbsp;by&nbsp;the&nbsp;algorithm&nbsp;specified<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;<a href="http://www.secg.org/sec1-v2.pdf">http://www.secg.org/sec1-v2.pdf</a>&nbsp;Section&nbsp;4.1.6&nbsp;(Public&nbsp;Key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recovery&nbsp;Operation)&nbsp;is&nbsp;the&nbsp;correct&nbsp;one&nbsp;for&nbsp;this&nbsp;signature.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sig&nbsp;(<a href="#Signature">Signature</a>):&nbsp;A&nbsp;<a href="#Signature">Signature</a>&nbsp;<a href="builtins.html#object">object</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Signature-__bytes__"><strong>__bytes__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Signature-__init__"><strong>__init__</strong></a>(self, r, s, recovery_id=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Signature-to_base64"><strong>to_base64</strong></a>(self)</dt><dd><tt>Hex&nbsp;representation&nbsp;of&nbsp;the&nbsp;serialized&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;Base64-encoded&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="Signature-to_der"><strong>to_der</strong></a>(self)</dt><dd><tt>Encodes&nbsp;this&nbsp;signature&nbsp;using&nbsp;DER<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes:&nbsp;The&nbsp;DER&nbsp;encoding&nbsp;of&nbsp;(self.<strong>r</strong>,&nbsp;self.<strong>s</strong>).</tt></dd></dl>
+
+<dl><dt><a name="Signature-to_hex"><strong>to_hex</strong></a>(self)</dt><dd><tt>Hex&nbsp;representation&nbsp;of&nbsp;the&nbsp;serialized&nbsp;byte&nbsp;stream.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;A&nbsp;hex-encoded&nbsp;string.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Signature-from_base64"><strong>from_base64</strong></a>(b64str)</dt><dd><tt>Generates&nbsp;a&nbsp;signature&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;Base64&nbsp;encoded&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b64str&nbsp;(str):&nbsp;A&nbsp;Base64-encoded&nbsp;string.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Signature">Signature</a>:&nbsp;A&nbsp;<a href="#Signature">Signature</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Signature-from_bytes"><strong>from_bytes</strong></a>(b)</dt><dd><tt>Extracts&nbsp;the&nbsp;r&nbsp;and&nbsp;s&nbsp;components&nbsp;from&nbsp;a&nbsp;byte&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;(bytes):&nbsp;A&nbsp;64-byte&nbsp;long&nbsp;string.&nbsp;The&nbsp;first&nbsp;32&nbsp;bytes&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extracted&nbsp;as&nbsp;the&nbsp;r&nbsp;component&nbsp;and&nbsp;the&nbsp;second&nbsp;32&nbsp;bytes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;extracted&nbsp;as&nbsp;the&nbsp;s&nbsp;component.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Signature">Signature</a>:&nbsp;A&nbsp;<a href="#Signature">Signature</a>&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;signature&nbsp;is&nbsp;incorrect&nbsp;length</tt></dd></dl>
+
+<dl><dt><a name="Signature-from_der"><strong>from_der</strong></a>(der)</dt><dd><tt>Decodes&nbsp;a&nbsp;<a href="#Signature">Signature</a>&nbsp;that&nbsp;was&nbsp;DER-encoded.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;der&nbsp;(bytes&nbsp;or&nbsp;str):&nbsp;The&nbsp;DER&nbsp;encoding&nbsp;to&nbsp;be&nbsp;decoded.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Signature">Signature</a>:&nbsp;The&nbsp;deserialized&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Signature-from_hex"><strong>from_hex</strong></a>(h)</dt><dd><tt>Extracts&nbsp;the&nbsp;r&nbsp;and&nbsp;s&nbsp;components&nbsp;from&nbsp;a&nbsp;hex-encoded&nbsp;string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;(str):&nbsp;A&nbsp;64-byte&nbsp;(128&nbsp;character)&nbsp;long&nbsp;string.&nbsp;The&nbsp;first<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;32&nbsp;bytes&nbsp;are&nbsp;extracted&nbsp;as&nbsp;the&nbsp;r&nbsp;component&nbsp;and&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;second&nbsp;32&nbsp;bytes&nbsp;are&nbsp;extracted&nbsp;as&nbsp;the&nbsp;s&nbsp;component.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Signature">Signature</a>:&nbsp;A&nbsp;<a href="#Signature">Signature</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>x</strong></dt>
+<dd><tt>Convenience&nbsp;property&nbsp;for&nbsp;any&nbsp;method&nbsp;that&nbsp;requires<br>
+this&nbsp;object&nbsp;to&nbsp;provide&nbsp;a&nbsp;Point&nbsp;interface.</tt></dd>
+</dl>
+<dl><dt><strong>y</strong></dt>
+<dd><tt>Convenience&nbsp;property&nbsp;for&nbsp;any&nbsp;method&nbsp;that&nbsp;requires<br>
+this&nbsp;object&nbsp;to&nbsp;provide&nbsp;a&nbsp;Point&nbsp;interface.</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_bytes"><strong>get_bytes</strong></a>(s)</dt><dd><tt>Returns&nbsp;the&nbsp;byte&nbsp;representation&nbsp;of&nbsp;a&nbsp;hex-&nbsp;or&nbsp;byte-string.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>bitcoin_curve</strong> = &lt;aquachain.crypto.ecdsa_python.secp256k1 object&gt;</td></tr></table>
+</body></html>
