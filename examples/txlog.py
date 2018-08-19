@@ -8,6 +8,14 @@ def handle_args():
 
 from aquachain.aquatool import AquaTool
 
+def format_tx(t):
+	s = ""
+	s += "["+t['hash'] + "]" + '\n'
+	s += "from   :"+t['from'] + '\n'
+	s += "to     :"+t['to'] + '\n'
+	s += "amount :"+str(int(t['value'],16)/1e18) + '\n'
+	return s
+
 def from_hex(i=0):
     return int(i, 16)
 WAIT_SECONDS=0.5
@@ -20,6 +28,8 @@ class System:
     def run(self):
         txpool = self.aqua.w3.txpool
         print('pending', from_hex(txpool.status.pending))
+        for tx in self.aqua.gethead()['transactions']:
+          print(format_tx(tx))
         print('queued', from_hex(txpool.status.queued))
         new_block_filter = self.aqua.w3.eth.filter('latest')
         new_transaction_filter = self.aqua.w3.eth.filter('pending')
@@ -30,7 +40,7 @@ class System:
                 for tx in txs:
                     tx_hash = tx.hex()
                     t = self.aqua.gettransaction(f'{tx_hash}')
-                    print("\nnew tx:", tx_hash,'\n\n', t,'\n')
+                    print("\nnew tx:", tx_hash,'\n\n', format_tx(t) ,'\n')
 
             newblock = new_block_filter.get_new_entries()
             if len(newblock) > 0:
